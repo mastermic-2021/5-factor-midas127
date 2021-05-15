@@ -17,33 +17,33 @@ encode(m)=fromdigits(Vec(Vecsmall(m)),128);
 \\	return(d);
 \\}
 
-v(x, B) = {
+v(x, B) = { \\log en base x de B, inutile
 	a = 1;
 	while( (a*x < B), a = a*x;);
 	return(a);
 }
 
-M(B) = {
+M(B) = {\\exposant dans pollard p-1, inutile
 	a = 1;
 	forprime(x = 2, B, a = a*v(x, B));
 	return(a);
 }
 
-modexp(a, e, mod) = {
+modexp(a, e, mod) = { \\exponentielle modulaire
 	b = Mod(a, mod);
 	k = b^e;
 	r = lift(k);
 	return(r);
 }
 
-pollard_factor(x, B) = {
+pollard_factor(x, B) = { \\pollard p-1
 	k = 2;
 	for(x=2, B, k = modexp(k, x, n););
 	g = gcd(k-1, n);
 	return(g);
 }
 
-p = pollard_factor(n, 3400);
+p = pollard_factor(n, 3400); \\apres quelques tests visiblement le facteur premier le plus grand est juste au dessous de 3400
 ep = (p+1)/4;
 q = n/p;
 eq = (q+1)/4;
